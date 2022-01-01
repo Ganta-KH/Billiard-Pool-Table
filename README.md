@@ -3,6 +3,8 @@
 Billiard Pool Table and Balls in 3D with changes and some clipping
 
 
+## How to use
+
 use: (Up, Down, Right, left) to move the white ball.
 
 use: (e) to put the white ball.
