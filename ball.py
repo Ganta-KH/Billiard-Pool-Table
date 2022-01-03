@@ -1,5 +1,4 @@
 from math import pi, sqrt, cos, sin, atan
-from tools import ball_raduis
 import pygame
 
 class Ball:

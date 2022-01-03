@@ -1,11 +1,11 @@
 import sys, os
 
-from tools import *
+from tools import projection, rotation, connect_points, draw_polygon
 from const import *
-from clip import *
-from rules import *
+from clip import clipping, CrossProduct, DotProduct, Zfarrr
+from rules import getInHole, allCollision
 
-def game():
+def main():
     
     os.environ['SDL_VIDEO_CENTERED'] = '1'
     pygame.event.get()
@@ -33,7 +33,7 @@ def game():
                 stick.verts[..., 2] += distZ
         elif not shoot and move:
             WhiteBall.verts = pointsB[0: nbrPointsInBall]
-
+ 
         
         r = rotation(camera.rot[0], camera.rot[1], camera.rot[2], [0, 0, 1])[2]
 
@@ -44,6 +44,7 @@ def game():
         clipT = clipping(projected_table, table_3D, Dot_ProductT, facesT, r, W, H)
 
         if len(clipT) != 0: Dot_ProductT = Dot_ProductT[clipT]
+        else: Dot_ProductT = np.array([])
 
         Dot_ProductT = Dot_ProductT[::-1]
 
@@ -55,20 +56,24 @@ def game():
             Dot_ProductB += [DotProduct(b3D, Balls[i].faces, camera, Cross_ProductB[i])]
             clipB = clipping(pballs, b3D, Dot_ProductB[i], Balls[i].faces, r, W, H)[::-1]
             if len(clipB) != 0: Dot_ProductB[i] = Dot_ProductB[i][clipB]
+            else: Dot_ProductB[i] = np.array([])
+
             projected_balls[i] = pballs
 
         ZclipB = Zfarrr(Balls, camera.pos)
 
         # Stick
-        pS = stick.rotate_stick(WhiteBall.center)
-        projected_stick, stick_3D = projection(pS, f, alpha, beta, cx, cy, camera.rot, camera.pos)
-        Cross_ProductS = CrossProduct(stick_3D, facesS)
-        Dot_ProductS = DotProduct(stick_3D, facesS, camera, Cross_ProductS)
-        clipS = clipping(projected_stick, stick_3D, Dot_ProductS, facesS, r, W, H)
+        if not shoot and not move:
+            pS = stick.rotate_stick(WhiteBall.center)
+            projected_stick, stick_3D = projection(pS, f, alpha, beta, cx, cy, camera.rot, camera.pos)
+            Cross_ProductS = CrossProduct(stick_3D, facesS)
+            Dot_ProductS = DotProduct(stick_3D, facesS, camera, Cross_ProductS)
+            clipS = clipping(projected_stick, stick_3D, Dot_ProductS, facesS, r, W, H)
 
-        if len(clipS) != 0: Dot_ProductS = Dot_ProductS[clipS]
+            if len(clipS) != 0: Dot_ProductS = Dot_ProductS[clipS]
+            else: Dot_ProductS = np.array([])
 
-        Dot_ProductS = Dot_ProductS[::-1]
+            Dot_ProductS = Dot_ProductS[::-1]
 
 
 
@@ -77,18 +82,20 @@ def game():
             screen.fill((0, 0, 0))
 
             # Table
-            for face in facesT[Dot_ProductT]:
-                for edge in range(0, 3):
-                    connect_points(screen, face[edge-1], face[edge], projected_table)
+            if len(Dot_ProductT) != 0:
+                for face in facesT[Dot_ProductT]:
+                    for edge in range(0, 3):
+                        connect_points(screen, face[edge-1], face[edge], projected_table)
 
             # Balls
             for i in ZclipB:
-                for face in facesB[Dot_ProductB[i]]:
-                    for edge in range(0, 3):
-                        connect_points(screen, face[edge-1], face[edge], projected_balls[i])
+                if len(Dot_ProductB[i]) != 0:
+                    for face in facesB[Dot_ProductB[i]]:
+                        for edge in range(0, 3):
+                            connect_points(screen, face[edge-1], face[edge], projected_balls[i])
 
             # Stick
-            if not shoot and not move:
+            if not shoot and not move and len(Dot_ProductS) != 0:
                 for face in facesS[Dot_ProductS]:
                     for edge in range(0, 3):
                         connect_points(screen, face[edge-1], face[edge], projected_stick)
@@ -165,4 +172,4 @@ def game():
         pygame.display.flip()
 
 if __name__ == '__main__':
-    game()
+    main()

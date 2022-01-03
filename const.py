@@ -13,9 +13,9 @@ cx, cy = W//2, H//2
 f, alpha, beta = 600, 1, 1
 
 pointsT, facesT, colorsT, facesNbrT = get_verts('assets/pool.obj')
-pointsB, facesB, colorsB, facesNbrB = get_verts('assets/balls.obj')
+pointsB, facesB, colorsB, facesNbrB = get_verts('assets/balls3.obj')
 pointsS, facesS, colorsS, facesNbrS = get_verts('assets/stick.obj')
-pointsH, _, _, _ = get_verts('assets/holles.obj')
+pointsH, *_ = get_verts('assets/holles.obj')
 colorsFT = np.zeros_like(facesT, dtype=np.float16)
 colorsFB = np.zeros_like(facesB, dtype=np.float16)
 colorsFS = np.zeros_like(facesS, dtype=np.float16)
@@ -50,22 +50,22 @@ nbrFacesInBall = int(len(facesB) / nbrBalls)
 
 pB = np.array(pointsB.reshape((nbrBalls, nbrPointsInBall, 3)))
 fB = facesB.reshape((nbrBalls, nbrFacesInBall, 3)) % nbrPointsInBall
-Balls = [Ball(pB[0], fB[0], centers[0], radiuss[0], colorsFB[0 : 48], 0),
-         Ball(pB[1], fB[1], centers[1], radiuss[1], colorsFB[48 : 48 * 2], 3),
-         Ball(pB[2], fB[2], centers[2], radiuss[2], colorsFB[48 * 2 : 48 * 3], 12),
-         Ball(pB[3], fB[3], centers[3], radiuss[3], colorsFB[48 * 3: 48 * 4], 5),
-         Ball(pB[4], fB[4], centers[4], radiuss[4], colorsFB[48 * 4 : 48 * 5], 10),
-         Ball(pB[5], fB[5], centers[5], radiuss[5], colorsFB[48 * 5 : 48 * 6], 14),
-         Ball(pB[6], fB[6], centers[6], radiuss[6], colorsFB[48 * 6 : 48 * 7], 8),
-         Ball(pB[7], fB[7], centers[7], radiuss[7], colorsFB[48 * 7 : 48 * 8], 15),
-         Ball(pB[8], fB[8], centers[8], radiuss[8], colorsFB[48 * 8 : 48 * 9], 4),
-         Ball(pB[9], fB[9], centers[9], radiuss[9], colorsFB[48 * 9 : 48 * 10], 1),
-         Ball(pB[10], fB[10], centers[10], radiuss[10], colorsFB[48 * 10 : 48 * 11], 9),
-         Ball(pB[11], fB[11], centers[11], radiuss[11], colorsFB[48 * 11 : 48 * 12], 13),
-         Ball(pB[12], fB[12], centers[12], radiuss[12], colorsFB[48 * 12 : 48 * 13], 2),
-         Ball(pB[13], fB[13], centers[13], radiuss[13], colorsFB[48 * 13 : 48 * 14], 7),
-         Ball(pB[14], fB[14], centers[14], radiuss[14], colorsFB[48 * 14 : 48 * 15], 6),
-         Ball(pB[15], fB[15], centers[15], radiuss[15], colorsFB[48 * 15 : 48 * 16], 11)]
+Balls = [Ball(pB[0], fB[0], centers[0], radiuss[0], colorsFB[0 : nbrFacesInBall], 0),
+         Ball(pB[1], fB[1], centers[1], radiuss[1], colorsFB[nbrFacesInBall : nbrFacesInBall * 2], 3),
+         Ball(pB[2], fB[2], centers[2], radiuss[2], colorsFB[nbrFacesInBall * 2 : nbrFacesInBall * 3], 12),
+         Ball(pB[3], fB[3], centers[3], radiuss[3], colorsFB[nbrFacesInBall * 3: nbrFacesInBall * 4], 5),
+         Ball(pB[4], fB[4], centers[4], radiuss[4], colorsFB[nbrFacesInBall * 4 : nbrFacesInBall * 5], 10),
+         Ball(pB[5], fB[5], centers[5], radiuss[5], colorsFB[nbrFacesInBall * 5 : nbrFacesInBall * 6], 14),
+         Ball(pB[6], fB[6], centers[6], radiuss[6], colorsFB[nbrFacesInBall * 6 : nbrFacesInBall * 7], 8),
+         Ball(pB[7], fB[7], centers[7], radiuss[7], colorsFB[nbrFacesInBall * 7 : nbrFacesInBall * 8], 15),
+         Ball(pB[8], fB[8], centers[8], radiuss[8], colorsFB[nbrFacesInBall * 8 : nbrFacesInBall * 9], 4),
+         Ball(pB[9], fB[9], centers[9], radiuss[9], colorsFB[nbrFacesInBall * 9 : nbrFacesInBall * 10], 1),
+         Ball(pB[10], fB[10], centers[10], radiuss[10], colorsFB[nbrFacesInBall * 10 : nbrFacesInBall * 11], 9),
+         Ball(pB[11], fB[11], centers[11], radiuss[11], colorsFB[nbrFacesInBall * 11 : nbrFacesInBall * 12], 13),
+         Ball(pB[12], fB[12], centers[12], radiuss[12], colorsFB[nbrFacesInBall * 12 : nbrFacesInBall * 13], 2),
+         Ball(pB[13], fB[13], centers[13], radiuss[13], colorsFB[nbrFacesInBall * 13 : nbrFacesInBall * 14], 7),
+         Ball(pB[14], fB[14], centers[14], radiuss[14], colorsFB[nbrFacesInBall * 14 : nbrFacesInBall * 15], 6),
+         Ball(pB[15], fB[15], centers[15], radiuss[15], colorsFB[nbrFacesInBall * 15 : nbrFacesInBall * 16], 11)]
 
 WhiteBall = Balls[0]
 
