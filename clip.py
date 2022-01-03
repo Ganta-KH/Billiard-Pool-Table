@@ -5,7 +5,7 @@ def clipping(projectedT, table_3D, clip, facesT, r, W, H):
     newFaces = []
     for count, face in enumerate(facesT[clip]):
         for f in face:
-            if any([ (0.1 < projectedT[f, 0] < W) and (0.1 < projectedT[f, 1] < H) and table_3D[f, 2] > r]):
+            if any([ (0.1 < projectedT[f, 0] < W) and (0.1 < projectedT[f, 1] < H) and table_3D[f, 2] >= r]):
                 newFaces.append(count)
                 break     
     return np.array(newFaces)

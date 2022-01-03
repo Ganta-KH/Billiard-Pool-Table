@@ -13,7 +13,7 @@ cx, cy = W//2, H//2
 f, alpha, beta = 600, 1, 1
 
 pointsT, facesT, colorsT, facesNbrT = get_verts('assets/pool.obj')
-pointsB, facesB, colorsB, facesNbrB = get_verts('assets/balls3.obj')
+pointsB, facesB, colorsB, facesNbrB = get_verts('assets/balls2.obj')
 pointsS, facesS, colorsS, facesNbrS = get_verts('assets/stick.obj')
 pointsH, *_ = get_verts('assets/holles.obj')
 colorsFT = np.zeros_like(facesT, dtype=np.float16)
