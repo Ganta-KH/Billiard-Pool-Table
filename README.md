@@ -2,6 +2,13 @@
 
 Billiard Pool Table and Balls in 3D with changes and some clipping
 
+## Libraries
+
+Libraries you need:
+
+pygame
+
+numpy
 
 ## How to use
 
