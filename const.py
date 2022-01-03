@@ -10,7 +10,7 @@ import numpy as np
 W, H = 1000, 600
 
 cx, cy = W//2, H//2
-f, alpha, beta = 600, 1, 1
+f, alpha, beta = 1000., 1., 1.
 
 pointsT, facesT, colorsT, facesNbrT = get_verts('assets/pool.obj')
 pointsB, facesB, colorsB, facesNbrB = get_verts('assets/balls2.obj')
@@ -103,7 +103,7 @@ screen = pygame.display.set_mode((W, H))
 clock = pygame.time.Clock()
 
 # object
-camera = Camera((0, -3, -17))
+camera = Camera((0, -3, -25))
 light = Light((0, -4, 0))
 stick = Stick(pointsS)
 
