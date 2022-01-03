@@ -28,6 +28,16 @@ for i in range(1, len(facesNbrT)):
     colorsFT[facesNbrT[i-1] : facesNbrT[i]] = colorsT[i-1]
 
 # color balls faces
+
+    # random balls color
+shuffles = np.arange(1, 16)
+np.random.shuffle(shuffles)
+colorsB_copy = np.array(colorsB)
+
+for count, i in enumerate(shuffles, start=1):
+    colorsB[count] = colorsB_copy[i]
+
+
 for i in range(1, len(facesNbrB)):
     colorsFB[facesNbrB[i-1] : facesNbrB[i]] = colorsB[i-1]
 
@@ -50,6 +60,7 @@ nbrFacesInBall = int(len(facesB) / nbrBalls)
 
 pB = np.array(pointsB.reshape((nbrBalls, nbrPointsInBall, 3)))
 fB = facesB.reshape((nbrBalls, nbrFacesInBall, 3)) % nbrPointsInBall
+
 Balls = [Ball(pB[0], fB[0], centers[0], radiuss[0], colorsFB[0 : nbrFacesInBall], 0),
          Ball(pB[1], fB[1], centers[1], radiuss[1], colorsFB[nbrFacesInBall : nbrFacesInBall * 2], 3),
          Ball(pB[2], fB[2], centers[2], radiuss[2], colorsFB[nbrFacesInBall * 2 : nbrFacesInBall * 3], 12),
@@ -93,7 +104,7 @@ clock = pygame.time.Clock()
 
 # object
 camera = Camera((0, -3, -17))
-light = Light((0,-7, 0))
+light = Light((0, -4, 0))
 stick = Stick(pointsS)
 
 # Holles position

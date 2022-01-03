@@ -3,7 +3,7 @@ import numpy as np
 
 def get_color(path):
     color = []
-    rgb = lambda x: float(x) * 255
+    rgb = lambda x: round(float(x) * 255.)
     with open(path) as f:
         for line in f.readlines():
             if re.match('Kd ', line):
