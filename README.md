@@ -21,10 +21,13 @@ use: (Up, Down, Right, left) to rotate the stick and change the power of the sho
 use: (a) to shoot the white ball.
 
 use: (c) to start or end moving the camera.
+
 use: (mouse) to rotate the camera.
+
 use: (z, s, q, d, w, LSHIFT, SPACE) to move the camera.
 
 use: (t, g, f, h, r, y) to move the light position.
+
 use: (o) to set the light in the original position.
 
 use: (L) to change the view of the game.
