@@ -1,6 +1,6 @@
 # 3D Billiard
 
-Billiard Pool Table and Balls in 3D with changes and some clipping
+Billiard Pool Table and Balls in 3D with Light and some Clipping
 
 ## Libraries
 
